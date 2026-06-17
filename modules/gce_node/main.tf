@@ -5,13 +5,13 @@ variable "network_name" { type = string }
 #   name = "${var.name}-swap-tmp"
 #   zone = var.zone
 #   type = "pd-balanced"
-#   size = 10
+#   size = 4
 # }
 
 resource "google_compute_instance" "node" {
   name         = var.name
   zone         = var.zone
-  tags         = concat(["allow-icmp", "allow-ssh", "allow-https", "allow-easytier"], var.extra_tags)
+  tags         = concat(["allow-icmp", "allow-ssh", "allow-https", "allow-iperf3", "allow-easytier"], var.extra_tags)
   machine_type = "e2-micro"
 
   allow_stopping_for_update = true
@@ -36,9 +36,9 @@ resource "google_compute_instance" "node" {
     auto_delete = true
     device_name = var.boot_disk_name
     initialize_params {
-      #   image = "projects/debian-cloud/global/images/debian-13-trixie-v20260310"
-      size = 30
-      type = "pd-standard"
+      image = "projects/debian-cloud/global/images/debian-13-trixie-v20260310"
+      size  = 30
+      type  = "pd-standard"
     }
     mode = "READ_WRITE"
   }

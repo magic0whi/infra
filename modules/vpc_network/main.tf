@@ -46,6 +46,21 @@ resource "google_compute_firewall" "allow_https" {
   }
 }
 
+resource "google_compute_firewall" "allow_iperf3" {
+  name          = "terraform-network-allow-iperf3"
+  network       = google_compute_network.vpc_network.id
+  target_tags   = ["allow-iperf3"]
+  source_ranges = ["0.0.0.0/0"]
+  allow {
+    protocol = "tcp"
+    ports    = ["5201"]
+  }
+  allow {
+    protocol = "udp"
+    ports    = ["5201"]
+  }
+}
+
 resource "google_compute_firewall" "allow_easytier" {
   name          = "terraform-network-allow-easytier"
   network       = google_compute_network.vpc_network.id

@@ -13,11 +13,12 @@ provider "google" {
 }
 
 locals { # Define Nodes
-  nodes = [{
-    name           = "proteus-nixos-0"
-    zone           = "us-west1-b"
-    boot_disk_name = "proteus-nixos-1"
-  }]
+  nodes = [
+    {
+      name = "proteus-nixos-0"
+      zone = "us-west1-b"
+    }
+  ]
 }
 
 module "network" { source = "../../modules/vpc_network" }
@@ -30,7 +31,7 @@ module "nodes" {
   project        = var.project_id
   sa_email       = var.sa_email
   name           = each.value.name
-  boot_disk_name = each.value.boot_disk_name
+  boot_disk_name = each.value.name
   zone           = each.value.zone
 
   network_id   = module.network.network_id
