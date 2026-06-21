@@ -1,9 +1,9 @@
-# resource "google_compute_disk" "swap_tmp" {
-#   name = "${var.name}-swap-tmp"
-#   zone = var.zone
-#   type = "pd-balanced"
-#   size = 4
-# }
+resource "google_compute_disk" "swap_tmp" {
+  name = "${var.name}-swap-tmp"
+  zone = var.zone
+  type = "pd-standard"
+  size = 2
+}
 
 resource "google_compute_instance" "node" {
   name         = var.name
@@ -23,18 +23,18 @@ resource "google_compute_instance" "node" {
     ssh-keys           = var.ssh_keys
   }
 
-  # attached_disk {
-  #   source      = google_compute_disk.swap_tmp.id
-  #   device_name = google_compute_disk.swap_tmp.name
-  #   mode        = "READ_WRITE"
-  # }
+  attached_disk {
+    source      = google_compute_disk.swap_tmp.id
+    device_name = google_compute_disk.swap_tmp.name
+    mode        = "READ_WRITE"
+  }
 
   boot_disk {
     auto_delete = true
     device_name = var.boot_disk_name
     initialize_params {
       image = "projects/debian-cloud/global/images/debian-13-trixie-v20260310"
-      size  = 30
+      size  = 28
       type  = "pd-standard"
     }
     mode = "READ_WRITE"
