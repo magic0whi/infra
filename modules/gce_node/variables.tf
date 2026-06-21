@@ -32,3 +32,9 @@ variable "extra_tags" {
   default     = []
   description = "Additional tags to add to the default list"
 }
+variable "network_id" { type = string }
+variable "network_name" { type = string }
+variable "desired_status" {
+  type    = string
+  default = "RUNNING"
+}

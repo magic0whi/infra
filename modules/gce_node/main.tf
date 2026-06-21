@@ -1,6 +1,3 @@
-variable "network_id" { type = string }
-variable "network_name" { type = string }
-
 # resource "google_compute_disk" "swap_tmp" {
 #   name = "${var.name}-swap-tmp"
 #   zone = var.zone
@@ -11,13 +8,13 @@ variable "network_name" { type = string }
 resource "google_compute_instance" "node" {
   name         = var.name
   zone         = var.zone
-  tags         = concat(["allow-icmp", "allow-ssh", "allow-https", "allow-iperf3", "allow-easytier"], var.extra_tags)
   machine_type = "e2-micro"
+  tags         = concat(["allow-icmp", "allow-ssh", "allow-https", "allow-iperf3", "allow-easytier"], var.extra_tags)
 
   allow_stopping_for_update = true
-  desired_status            = "RUNNING"
-  can_ip_forward            = false
-  enable_display            = false
+  desired_status            = var.desired_status
+  can_ip_forward            = true
+  enable_display            = true
   deletion_protection       = false
   labels                    = { goog-ec-src = "vm_add-tf" }
 

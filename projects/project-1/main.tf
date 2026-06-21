@@ -27,14 +27,14 @@ locals {
     #   name = "proteus-nixos-3"
     #   zone = "europe-west2-c"
     # },
-    {
-      name = "proteus-nixos-4"
-      zone = "europe-west2-c"
-    },
-    {
-      name = "proteus-nixos-5"
-      zone = "asia-east2-a"
-    }
+    # {
+    #   name = "proteus-nixos-4"
+    #   zone = "europe-west2-c"
+    # },
+    # {
+    #   name = "proteus-nixos-5"
+    #   zone = "asia-east2-a"
+    # }
   ]
 }
 
