@@ -10,10 +10,14 @@ variable "ssh_keys" {
   type        = string
   description = "SSH keys to add to the instance metadata"
 }
+variable "credential" {
+  type        = string
+  description = "The credential to access the gcloud"
+}
 
 provider "google" {
   project     = var.project_id
-  credentials = file("~/.config/gcloud/project-0.secret.json")
+  credentials = file(var.credential)
 }
 
 locals { # Define Nodes

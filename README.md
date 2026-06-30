@@ -6,6 +6,7 @@ To swith:
 ```bash
 gcloud config configurations activate project-0
 gcloud config configurations activate project-1
+gcloud config configurations activate project-2
 ```
 
 ## Rescue

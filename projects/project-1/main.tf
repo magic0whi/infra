@@ -6,10 +6,14 @@ variable "sa_email" {
   type        = string
   description = "The service account email to associate with nodes"
 }
+variable "credential" {
+  type        = string
+  description = "The credential to access the gcloud"
+}
 
 provider "google" {
   project     = var.project_id
-  credentials = file("~/.config/gcloud/project-1.secret.json")
+  credentials = file(var.credential)
 }
 
 # Define Nodes
