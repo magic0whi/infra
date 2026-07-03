@@ -16,13 +16,8 @@ provider "google" {
   credentials = file(var.credential)
 }
 
-# Define Nodes
 locals {
   nodes = [
-    # {
-    #   name = "proteus-nixos-1"
-    #   zone = "us-central1-c"
-    # },
     {
       name = "proteus-nixos-2"
       zone = "europe-west10-c"

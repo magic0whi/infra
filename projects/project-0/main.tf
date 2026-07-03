@@ -6,10 +6,10 @@ variable "sa_email" {
   type        = string
   description = "The service account email to associate with nodes"
 }
-variable "ssh_keys" {
-  type        = string
-  description = "SSH keys to add to the instance metadata"
-}
+# variable "ssh_keys" {
+#   type        = string
+#   description = "SSH keys to add to the instance metadata"
+# }
 variable "credential" {
   type        = string
   description = "The credential to access the gcloud"
@@ -36,9 +36,9 @@ module "nodes" {
   source   = "../../modules/gce_node"
   for_each = { for n in local.nodes : n.name => n }
 
-  project        = var.project_id
-  sa_email       = var.sa_email
-  ssh_keys       = var.ssh_keys
+  project  = var.project_id
+  sa_email = var.sa_email
+  # ssh_keys       = var.ssh_keys
   name           = each.value.name
   boot_disk_name = each.value.name
   zone           = each.value.zone

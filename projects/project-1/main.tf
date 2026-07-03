@@ -6,6 +6,10 @@ variable "sa_email" {
   type        = string
   description = "The service account email to associate with nodes"
 }
+# variable "ssh_keys" {
+#   type        = string
+#   description = "SSH keys to add to the instance metadata"
+# }
 variable "credential" {
   type        = string
   description = "The credential to access the gcloud"
@@ -16,29 +20,12 @@ provider "google" {
   credentials = file(var.credential)
 }
 
-# Define Nodes
 locals {
   nodes = [
-    # {
-    #   name = "proteus-nixos-1"
-    #   zone = "us-central1-c"
-    # },
-    # {
-    #   name = "proteus-nixos-2"
-    #   zone = "europe-west10-c"
-    # },
-    # {
-    #   name = "proteus-nixos-3"
-    #   zone = "europe-west2-c"
-    # },
-    # {
-    #   name = "proteus-nixos-4"
-    #   zone = "europe-west2-c"
-    # },
-    # {
-    #   name = "proteus-nixos-5"
-    #   zone = "asia-east2-a"
-    # }
+    {
+      name = "proteus-nixos-1"
+      zone = "us-central1-c"
+    },
   ]
 }
 
@@ -48,8 +35,9 @@ module "nodes" {
   source   = "../../modules/gce_node"
   for_each = { for n in local.nodes : n.name => n }
 
-  project        = var.project_id
-  sa_email       = var.sa_email
+  project  = var.project_id
+  sa_email = var.sa_email
+  # ssh_keys       = var.ssh_keys
   name           = each.value.name
   boot_disk_name = each.value.name
   zone           = each.value.zone
