@@ -50,6 +50,17 @@ resource "google_compute_firewall" "allow_https" {
   }
 }
 
+resource "google_compute_firewall" "allow_garage" {
+  name          = "terraform-network-allow-garage"
+  network       = google_compute_network.vpc_network.id
+  target_tags   = ["allow-garage"]
+  source_ranges = ["0.0.0.0/0"]
+  allow {
+    protocol = "tcp"
+    ports    = ["3901"]
+  }
+}
+
 resource "google_compute_firewall" "allow_iperf3" {
   name          = "terraform-network-allow-iperf3"
   network       = google_compute_network.vpc_network.id

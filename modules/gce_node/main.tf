@@ -9,7 +9,7 @@ resource "google_compute_instance" "node" {
   name         = var.name
   zone         = var.zone
   machine_type = "e2-micro"
-  tags         = concat(["allow-icmp", "allow-ssh", "allow-https", "allow-iperf3", "allow-easytier"], var.extra_tags)
+  tags         = concat(["allow-icmp", "allow-ssh", "allow-https", "allow-garage", "allow-iperf3", "allow-easytier"], var.extra_tags)
 
   allow_stopping_for_update = true
   desired_status            = var.desired_status

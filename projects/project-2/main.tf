@@ -24,7 +24,7 @@ locals {
     },
     {
       name = "proteus-nixos-3"
-      zone = "europe-west2-c"
+      zone = "asia-northeast1-b"
     },
     {
       name = "proteus-nixos-4"
