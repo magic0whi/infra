@@ -11,6 +11,8 @@ variable "credential" {
   description = "The credential to access the gcloud"
 }
 
+module "providers" { source = "../../modules/providers" }
+
 provider "google" {
   project     = var.project_id
   credentials = file(var.credential)
