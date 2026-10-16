@@ -15,7 +15,7 @@ variable "credential" {
   description = "The credential to access the gcloud"
 }
 
-module "providers" { source = "../../modules/providers" }
+module "providers" { source = "../../modules/gcp/provider" }
 
 provider "google" {
   project     = var.project_id
@@ -32,10 +32,10 @@ locals { # Define Nodes
   ]
 }
 
-module "network" { source = "../../modules/vpc_network" }
+module "network" { source = "../../modules/gcp/network" }
 
 module "nodes" {
-  source   = "../../modules/gce_node"
+  source   = "../../modules/gcp/node"
   for_each = { for n in local.nodes : n.name => n }
 
   project  = var.project_id

@@ -38,3 +38,13 @@ variable "desired_status" {
   type    = string
   default = "RUNNING"
 }
+variable "start_schedule" {
+  type        = string
+  default     = null
+  description = "Cron expression to auto-start the node (e.g. \"0 0 1 * *\" for 00:00 on the 1st of each month). null disables scheduling."
+}
+variable "schedule_timezone" {
+  type        = string
+  default     = "UTC"
+  description = "IANA time zone the start_schedule cron is evaluated in (e.g. \"Asia/Shanghai\")."
+}
